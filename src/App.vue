@@ -1,28 +1,55 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <board />
+    <div v-if="instructions" class="instructions">
+      {{ instruction_string }}
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import board from './components/board.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    board
+  },
+  data: function () {
+    return {
+      item: '',
+      cardProp: '',
+      instructions: true,
+      instruction_string: 'Click to flip'
+    }
   }
 }
 </script>
 
 <style lang="scss">
-#app {
+html, body{
+  width:100%;
+  height:100%;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  overflow:hidden;
+  margin:0;
+  padding:0;
+}
+#app{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  height:100%;
+  background-color:rgb(48, 48, 48);
+  flex-direction: column;
+}
+.instructions{
+  color:white;
+  padding:3em;
+  text-transform:uppercase;
 }
 </style>
