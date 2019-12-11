@@ -3,7 +3,7 @@
     <div class="board__inner">
       <!-- v-for is looping cards array -->
       <!-- cards the prop that card item accepts, we're passing it 'item', which is one object of the array, the properties of which will be used in the cardItem component -->
-      <card v-for="item in cards" v-bind:cardProp="item" v-bind:key="item.id" />
+      <card v-for="item in this.cards" v-bind:cardProp="item" v-bind:key="item.id" />
     </div>
   </div>
 </template>
@@ -34,12 +34,31 @@ export default {
           name: 'crab',
           color: 'purple'
         }
+      ],
+      shuffledCards: [
       ]
     }
   },
+  methods: {
+    shuffler: function (arra1) {
+      let ctr = arra1.length
+      let temp
+      let index
+      while (ctr > 0) {
+        index = Math.floor(Math.random() * ctr)
+        ctr--
+        temp = arra1[ctr]
+        arra1[ctr] = arra1[index]
+        arra1[index] = temp
+      }
+      return arra1
+    }
+  },
   mounted: function () {
-    let shuffledCards = this.cards
-    console.log(shuffledCards)
+    let newOrder = this.shuffler(this.cards)
+    this.shuffledCards.push(newOrder)
+    // console.log(this.shuffledCards)
+    console.log(this.cards)
   },
   props: {
     msg: String
